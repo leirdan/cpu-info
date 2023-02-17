@@ -15,6 +15,7 @@ const pc = {
 	freeRam: freeRam,
 	occupiedRam: occupiedRam
 };
+
 setInterval(() => {
 	console.clear();
 	console.table(pc);
