@@ -2,6 +2,8 @@ import { arch, cpus, platform, type, totalmem, freemem, networkInterfaces } from
 
 const totalRam = (totalmem() / 1024 / 1024 / 1000).toPrecision(3) + "Gb";
 const freeRam = (freemem() / 1024 / 1024 / 100).toPrecision(3) + "Gb";
+const usageRam = parseFloat(totalRam) - parseFloat(freeRam);
+const occupiedRam = (usageRam / 1024 / 1024 / 100).toPrecision(3) + "Gb";
 
 const pc = {
 	OS: platform(),
@@ -10,7 +12,10 @@ const pc = {
 	cpu: cpus(),
 	netInterfaces: networkInterfaces(),
 	ram: totalRam,
-	freeRam: freeRam
+	freeRam: freeRam,
+	occupiedRam: occupiedRam
 };
-
-console.log(pc);
+setInterval(() => {
+	console.clear();
+	console.table(pc);
+}, 2000);
